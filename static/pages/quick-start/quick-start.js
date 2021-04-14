@@ -1,3 +1,5 @@
+// https://yandex.ru/dev/maps/jsapi/doc/2.1/quick-start/index.html
+
 // Функция ymaps.ready() будет вызвана, когда
 // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
 window.ymaps.ready(init);
