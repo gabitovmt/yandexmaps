@@ -44,7 +44,7 @@ const myMap = new MyMap();
   необходимо при задании опций сослаться на идентификатор пресета из этого хранилища
   с помощью ключа preset.
  */
-myMap.ready((map) => {
+myMap.run((map) => {
   const myPlacemark = new ymaps.Placemark(map.getCenter(), {
     iconContent: 'Пользуйтесь пресетами'
   }, {

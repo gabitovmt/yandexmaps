@@ -12,7 +12,7 @@ export default class MyMap {
     });
   }
 
-  ready(func) {
+  run(func) {
     (async () => {
       const map = await this._mapPromise;
       func(map);
