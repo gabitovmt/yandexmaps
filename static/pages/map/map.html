@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Карта</title>
+  <link rel="stylesheet" href="../../common/index.css">
+  <link rel="stylesheet" href="map.css">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=20d5567d-5b4d-4bad-9ec2-6c4665277850&lang=ru_RU" type="text/javascript"></script>
+  <script type="module" src="map.js"></script>
+</head>
+<body>
+<p><a href="../../index.html">Назад</a></p>
+<div class="maps">
+  <div class="maps__map">
+    <p>Карта Москвы</p>
+    <div><button id="first-map__destroy-btn">Уничтожить карту</button></div>
+    <div id="first-map" class="map"></div>
+  </div>
+  <div class="maps__map">
+    <p>Карта Санкт-Петербурга</p>
+    <div><button id="second-map__destroy-btn">Уничтожить карту</button></div>
+    <div class="map second-map"></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.maps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.maps__map {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.maps__map > * {
+  margin: 0;
+}
+
+.map {
+  height: 300px;
+  background: aliceblue;
+}
