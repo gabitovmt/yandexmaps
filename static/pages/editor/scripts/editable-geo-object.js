@@ -1,38 +1,23 @@
-import editablePolygon from "./editable-polygon.js";
-import editableLine from "./editable-line.js";
-import editablePoint from "./editable-point.js";
-import editableArrow from "./editable-arrow.js";
+import IEditableGeoObject from "./i-editable-geo-object.js";
 
-export default class EditableGeoObject {
+export default class EditableGeoObject extends IEditableGeoObject {
   constructor(yandexMap, geoObjectOptions) {
+    super();
     this._yandexMap = yandexMap;
-    this._geoObject = this._newGeoObject(geoObjectOptions);
+    this._geoObjectOptions = geoObjectOptions;
+    this._geoObject = null;
 
     this._init();
   }
 
-  _newGeoObject(geoObjectOptions) {
-    switch (geoObjectOptions.type) {
-      case 'POLYGON':
-        return editablePolygon(geoObjectOptions);
-      case 'LINE':
-        return editableLine(geoObjectOptions);
-      case 'POINT':
-        return editablePoint(geoObjectOptions);
-      case 'ARROW':
-        return editableArrow(geoObjectOptions);
-      default:
-        throw new Error(`geoObjectOptions.type is not supported`);
-    }
+  get _newGeoObject() {
+    throw new Error('method must be overridden');
   }
 
   _init() {
+    this._geoObject = this._newGeoObject;
     this._yandexMap.geoObjects.add(this._geoObject);
     this._geoObject.editor.startDrawing();
-  }
-
-  get geoObject() {
-    return this._geoObject;
   }
 
   stopDrawing() {

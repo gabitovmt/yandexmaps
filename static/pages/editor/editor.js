@@ -1,5 +1,5 @@
 import GeoObjectOptions from "./scripts/geo-object-options.js";
-import EditableGeoObject from "./scripts/editable-geo-object.js";
+import EditableGeoObjectFactory from "./scripts/editable-geo-object-factory.js";
 
 class ControlPanelForm {
   constructor(idForm, yandexMap) {
@@ -54,7 +54,9 @@ class ControlPanelForm {
     }
 
     this._isDrawing = true;
-    this._editableGeoObject = new EditableGeoObject(this._yandexMap, this._geoObjectOptions);
+
+    const factory = new EditableGeoObjectFactory();
+    this._editableGeoObject = factory.create(this._yandexMap, this._geoObjectOptions);
   }
 
   _stopDrawingBtnCallback() {
