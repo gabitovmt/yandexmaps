@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактор фигур</title>
+  <link rel="stylesheet" href="editor.css">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=20d5567d-5b4d-4bad-9ec2-6c4665277850&lang=ru_RU&mode=debug" type="text/javascript"></script>
+  <script type="module" src="editor.js"></script>
+</head>
+<body>
+<p class="back"><a href="../../index.html">Назад</a></p>
+<form id="control-panel-form" class="control-panel">
+  <div class="control-panel__field">
+    <span>Тип объекта</span>
+    <label class="control-panel__radio">
+      <input type="radio" name="type" value="POLYGON" checked>
+      <span>Полигон</span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type" value="LINE">
+      <span>Линия</span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type" value="POINT">
+      <span>Точка</span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type" value="ARROW">
+      <span>Направление</span>
+    </label>
+  </div>
+  <div class="control-panel__field">
+    <label>
+      <span>Цвет объектов</span>
+      <input type="text" name="color" value="#000000" pattern="#[0-9A-Fa-f]{6}" placeholder="#000000">
+    </label>
+  </div>
+  <div class="control-panel__field">
+    <label>
+      <span>Высота</span>
+      <input type="number" name="level" min="0" max="999" value="850">
+    </label>
+  </div>
+  <div class="control-panel__field">
+    <label>
+      <span>Прозрачность</span>
+      <input type="number" name="transparency" min="0" max="100" value="55">
+    </label>
+  </div>
+  <input type="submit" name="start-drawing-btn" value="Нарисовать объект">
+  <input type="button" name="stop-drawing-btn" value="Завершить рисование" disabled>
+</form>
+<div id="map" class="map"></div>
+</body>
+</html>

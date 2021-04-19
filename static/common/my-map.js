@@ -16,6 +16,6 @@ export default class MyMap {
     (async () => {
       const map = await this._mapPromise;
       func(map);
-    })()
+    })();
   }
 }
