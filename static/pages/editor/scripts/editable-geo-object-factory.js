@@ -1,18 +1,26 @@
 import EditablePolygon from "./editable-polygon.js";
 import EditableLine from "./editable-line.js";
 import EditablePoint from "./editable-point.js";
+import EditableArrow from "./editable-arrow.js";
 
 export default class EditableGeoObjectFactory {
   create(yandexMap, geoObjectOptions) {
-    switch (geoObjectOptions.type) {
+    const constructor = this._editableGeoObjectConstructor(geoObjectOptions.type);
+
+    return new constructor(yandexMap, geoObjectOptions);
+  }
+  _editableGeoObjectConstructor(type) {
+    switch (type) {
       case 'POLYGON':
-        return new EditablePolygon(yandexMap, geoObjectOptions);
+        return EditablePolygon;
       case 'LINE':
-        return new EditableLine(yandexMap, geoObjectOptions);
+        return EditableLine;
       case 'POINT':
-        return new EditablePoint(yandexMap, geoObjectOptions);
+        return EditablePoint;
+      case 'ARROW':
+        return EditableArrow;
       default:
-        throw new Error(`${geoObjectOptions.type} is not supported`);
+        throw new Error(`${type} is not supported`);
     }
   }
 }

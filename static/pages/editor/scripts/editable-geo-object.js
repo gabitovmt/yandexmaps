@@ -7,15 +7,15 @@ export default class EditableGeoObject extends IEditableGeoObject {
     this._geoObjectOptions = geoObjectOptions;
     this._geoObject = null;
 
-    this._init();
+    (async () => this._init())();
   }
 
-  get _newGeoObject() {
+  async _newGeoObject() {
     throw new Error('method must be overridden');
   }
 
-  _init() {
-    this._geoObject = this._newGeoObject;
+  async _init() {
+    this._geoObject = await this._newGeoObject();
     this._yandexMap.geoObjects.add(this._geoObject);
     this._geoObject.editor.startDrawing();
   }

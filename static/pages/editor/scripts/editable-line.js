@@ -5,7 +5,7 @@ export default class EditableLine extends EditableGeoObject {
     super(yandexMap, geoObjectOptions);
   }
 
-  get _newGeoObject() {
+  async _newGeoObject() {
     const o = this._geoObjectOptions;
 
     return new ymaps.Polyline([], {}, {
@@ -14,7 +14,7 @@ export default class EditableLine extends EditableGeoObject {
       strokeColor: o.color,
       strokeWidth: 5,
       opacity: o.opacity,
-      zIndex: o.zIndex,
+      zIndex: o.zIndex
     });
   }
 }

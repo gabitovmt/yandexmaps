@@ -5,7 +5,7 @@ export default class EditablePolygon extends EditableGeoObject{
     super(yandexMap, geoObjectOptions);
   }
 
-  get _newGeoObject() {
+  async _newGeoObject() {
     const o = this._geoObjectOptions;
 
     return new ymaps.Polygon([], {}, {
