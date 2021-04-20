@@ -1,5 +1,6 @@
 import GeoObjectOptions from "./scripts/geo-object-options.js";
 import EditableGeoObjectFactory from "./scripts/editable-geo-object-factory.js";
+import Utils from "./scripts/utils.js";
 
 class ControlPanelForm {
   constructor(idForm, yandexMap) {
@@ -31,16 +32,17 @@ class ControlPanelForm {
     const form = this._form;
 
     const type = form.elements.type.value;
+    const typePoint = form.elements['type-point'].value;
     const color = form.elements.color.value.toUpperCase();
     const level = +form.elements.level.value;
     const transparency = +form.elements.transparency.value;
-    const opacity = 1 - transparency / 100;
-    const roundOpacity = +(opacity).toFixed(2); // Округляем до двух знаков после запятой
+    const opacity = Utils.round(1 - transparency / 100, 2);
 
     return new GeoObjectOptions({
       type,
+      typePoint,
       color,
-      opacity: roundOpacity,
+      opacity,
       zIndex: level
     });
   }

@@ -30,6 +30,49 @@
     </label>
   </div>
   <div class="control-panel__field">
+    <span>Тип точки</span>
+    <label class="control-panel__radio">
+      <input type="radio" name="type-point" value="STAR" checked>
+      <span>
+        <svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="5 0, 6.117 3.463, 9.755 3.455, 6.807 5.587, 7.9389 9.0451, 5 6.9, 2.0611 9.0451, 3.193 5.587, 0.245 3.455, 3.883 3.463" fill="black" stroke="black" stroke-width="0.5" />
+        </svg>
+      </span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type-point" value="CIRCLE">
+      <span>
+        <svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="5" cy="5" r="5" fill="black" />
+        </svg>
+      </span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type-point" value="SQUARE">
+      <span>
+        <svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="10" height="10" fill="black" />
+        </svg>
+      </span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type-point" value="TRIANGLE">
+      <span>
+        <svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0 10, 5 0, 10 10" fill="black" />
+        </svg>
+      </span>
+    </label>
+    <label class="control-panel__radio">
+      <input type="radio" name="type-point" value="RHOMBUS">
+      <span>
+        <svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0 5, 5 0, 10 5, 5 10" fill="black" />
+        </svg>
+      </span>
+    </label>
+  </div>
+  <div class="control-panel__field">
     <label>
       <span>Цвет объектов</span>
       <input type="text" name="color" value="#000000" pattern="#[0-9A-Fa-f]{6}" placeholder="#000000">
