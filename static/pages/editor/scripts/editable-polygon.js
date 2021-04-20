@@ -5,11 +5,14 @@ export default class EditablePolygon extends EditableGeoObject{
     super(yandexMap, geoObjectOptions);
   }
 
-  async _newGeoObject() {
+  get coordinates() {
+    return this._geoObject.geometry.getCoordinates()[0];
+  }
+
+  _newGeoObject() {
     const o = this._geoObjectOptions;
 
     return new ymaps.Polygon([], {}, {
-      draggable: true,
       editorDrawingCursor: 'crosshair',
       // Контекстное меню вершины
       editorMenuManager(editorItems) {

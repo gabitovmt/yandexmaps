@@ -24,7 +24,13 @@ export default class EditablePoint extends EditableGeoObject {
     super(yandexMap, geoObjectOptions);
   }
 
-  async _newGeoObject() {
+  get coordinates() {
+    const coordinates = this._geoObject.geometry.getCoordinates();
+
+    return coordinates != null ? [coordinates] : [];
+  }
+
+  _newGeoObject() {
     const o = this._geoObjectOptions;
 
     return new ymaps.GeoObject({
@@ -33,7 +39,6 @@ export default class EditablePoint extends EditableGeoObject {
       },
       properties: {}
     }, {
-      draggable: true,
       editorDrawingCursor: 'crosshair',
       iconColor: o.color,
       iconLayout: this._iconLayout(),

@@ -6,18 +6,23 @@ export default class EditableGeoObject extends IEditableGeoObject {
     this._yandexMap = yandexMap;
     this._geoObjectOptions = geoObjectOptions;
     this._geoObject = null;
-
-    (async () => this._init())();
+    this._init();
   }
 
-  async _newGeoObject() {
+  _newGeoObject() {
     throw new Error('method must be overridden');
   }
 
-  async _init() {
-    this._geoObject = await this._newGeoObject();
+  _init() {
+    this._geoObject = this._newGeoObject();
     this._yandexMap.geoObjects.add(this._geoObject);
+  }
+
+  startDrawing() {
     this._geoObject.editor.startDrawing();
+    this._geoObject.options.set({
+      draggable: true
+    });
   }
 
   stopDrawing() {
@@ -26,5 +31,14 @@ export default class EditableGeoObject extends IEditableGeoObject {
     this._geoObject.options.set({
       draggable: false
     });
+
+    if (this.coordinates.length === 0) {
+      // Ничего не нарисовали. Удаляем за ненадобностью
+      this._yandexMap.geoObjects.remove(this._geoObject);
+    }
+  }
+
+  get geoObjectOptions() {
+    return this._geoObjectOptions;
   }
 }

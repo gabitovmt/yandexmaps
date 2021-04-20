@@ -5,11 +5,14 @@ export default class EditableLine extends EditableGeoObject {
     super(yandexMap, geoObjectOptions);
   }
 
-  async _newGeoObject() {
+  get coordinates() {
+    return this._geoObject.geometry.getCoordinates();
+  }
+
+  _newGeoObject() {
     const o = this._geoObjectOptions;
 
     return new ymaps.Polyline([], {}, {
-      draggable: true,
       editorDrawingCursor: 'crosshair',
       strokeColor: o.color,
       strokeWidth: 5,

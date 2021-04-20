@@ -27,7 +27,8 @@ input {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
+  flex-wrap: wrap;
 }
 
 .control-panel__field,

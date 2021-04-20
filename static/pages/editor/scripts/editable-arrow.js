@@ -1,29 +1,31 @@
 import EditableGeoObject from "./editable-geo-object.js";
 import "./arrow.js";
 
+let Arrow = null;
+// Пользовательские модули не дописываются в неймспейс ymaps.
+// Поэтому доступ к ним мы можем получить асинхронно через метод ymaps.modules.require.
+ymaps.modules.require(['geoObject.Arrow'], function (GeoObjectArrow) {
+  Arrow = GeoObjectArrow;
+});
+
 export default class EditableArrow extends EditableGeoObject {
   constructor(yandexMap, geoObjectOptions) {
     super(yandexMap, geoObjectOptions);
   }
 
-  async _newGeoObject() {
+  get coordinates() {
+    return this._geoObject.geometry.getCoordinates();
+  }
+
+  _newGeoObject() {
     const o = this._geoObjectOptions;
 
-    return new Promise((resolve) => {
-      // Пользовательские модули не дописываются в неймспейс ymaps.
-      // Поэтому доступ к ним мы можем получить асинхронно через метод ymaps.modules.require.
-      ymaps.modules.require(['geoObject.Arrow'], function (Arrow) {
-        const arrow = new Arrow([], null, {
-          draggable: true,
-          editorDrawingCursor: 'crosshair',
-          strokeColor: o.color,
-          strokeWidth: 5,
-          opacity: o.opacity,
-          zIndex: o.zIndex
-        });
-
-        resolve(arrow);
-      });
+    return new Arrow([], {}, {
+      editorDrawingCursor: 'crosshair',
+      strokeColor: o.color,
+      strokeWidth: 5,
+      opacity: o.opacity,
+      zIndex: o.zIndex
     });
   }
 }

@@ -59,6 +59,7 @@ class ControlPanelForm {
 
     const factory = new EditableGeoObjectFactory();
     this._editableGeoObject = factory.create(this._yandexMap, this._geoObjectOptions);
+    this._editableGeoObject.startDrawing();
   }
 
   _stopDrawingBtnCallback() {
