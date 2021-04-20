@@ -7,12 +7,17 @@ class ControlPanelForm {
     this._form = document.getElementById(idForm);
     this._yandexMap = yandexMap;
     this._editableGeoObject = null;
+    this._objects = [];
 
     this._startDrawingBtnCallback = this._startDrawingBtnCallback.bind(this);
     this._stopDrawingBtnCallback = this._stopDrawingBtnCallback.bind(this);
+    this._clearMapBtnCallback = this._clearMapBtnCallback.bind(this);
+    this._saveObjectsBtnCallback = this._saveObjectsBtnCallback.bind(this);
 
     this._startDrawingBtn.addEventListener('click', this._startDrawingBtnCallback);
     this._stopDrawingBtn.addEventListener('click', this._stopDrawingBtnCallback);
+    this._clearMapBtn.addEventListener('click', this._clearMapBtnCallback);
+    this._saveObjectsBtn.addEventListener('click', this._saveObjectsBtnCallback);
   }
 
   get _startDrawingBtn() {
@@ -23,9 +28,19 @@ class ControlPanelForm {
     return this._form.elements['stop-drawing-btn'];
   }
 
+  get _clearMapBtn() {
+    return this._form.elements['clear-map-btn'];
+  }
+
+  get _saveObjectsBtn() {
+    return this._form.elements['save-objects-btn'];
+  }
+
   set _isDrawing(value) {
     this._startDrawingBtn.disabled = value;
     this._stopDrawingBtn.disabled = !value;
+    this._clearMapBtn.disabled = value;
+    this._saveObjectsBtn.disabled = value;
   }
 
   get _geoObjectOptions() {
@@ -66,6 +81,21 @@ class ControlPanelForm {
     this._isDrawing = false;
 
     this._editableGeoObject.stopDrawing();
+    this._editableGeoObject.coordinates.length > 0 && this._objects.push(this._editableGeoObject);
+  }
+
+  _clearMapBtnCallback() {
+    this._yandexMap.geoObjects.removeAll();
+    this._objects = [];
+  }
+
+  _saveObjectsBtnCallback() {
+    const objects = this._objects.map(editableGeoObject => ({
+      coordinates: editableGeoObject.coordinates,
+      geoObjectOptions: editableGeoObject.geoObjectOptions
+    }));
+
+    localStorage.setItem('objects', JSON.stringify(objects));
   }
 }
 
