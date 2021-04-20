@@ -1,8 +1,8 @@
 import EditableGeoObject from "./editable-geo-object.js";
 
 export default class EditableLine extends EditableGeoObject {
-  constructor(yandexMap, geoObjectOptions) {
-    super(yandexMap, geoObjectOptions);
+  constructor(yandexMap, coordinates, geoObjectOptions) {
+    super(yandexMap, coordinates, geoObjectOptions);
   }
 
   get coordinates() {
@@ -12,7 +12,7 @@ export default class EditableLine extends EditableGeoObject {
   _newGeoObject() {
     const o = this._geoObjectOptions;
 
-    return new ymaps.Polyline([], {}, {
+    return new ymaps.Polyline(this._coordinates, {}, {
       editorDrawingCursor: 'crosshair',
       strokeColor: o.color,
       strokeWidth: 5,

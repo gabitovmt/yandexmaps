@@ -4,10 +4,10 @@ import EditablePoint from "./editable-point.js";
 import EditableArrow from "./editable-arrow.js";
 
 export default class EditableGeoObjectFactory {
-  create(yandexMap, geoObjectOptions) {
+  create(yandexMap, coordinates, geoObjectOptions) {
     const constructor = this._editableGeoObjectConstructor(geoObjectOptions.type);
 
-    return new constructor(yandexMap, geoObjectOptions);
+    return new constructor(yandexMap, coordinates, geoObjectOptions);
   }
   _editableGeoObjectConstructor(type) {
     switch (type) {

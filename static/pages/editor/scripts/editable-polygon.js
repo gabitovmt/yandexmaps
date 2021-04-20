@@ -1,8 +1,8 @@
 import EditableGeoObject from "./editable-geo-object.js";
 
 export default class EditablePolygon extends EditableGeoObject{
-  constructor(yandexMap, geoObjectOptions) {
-    super(yandexMap, geoObjectOptions);
+  constructor(yandexMap, coordinates, geoObjectOptions) {
+    super(yandexMap, coordinates, geoObjectOptions);
   }
 
   get coordinates() {
@@ -11,8 +11,9 @@ export default class EditablePolygon extends EditableGeoObject{
 
   _newGeoObject() {
     const o = this._geoObjectOptions;
+    const coordinates = this._coordinates.length > 0 ? [this._coordinates] : [];
 
-    return new ymaps.Polygon([], {}, {
+    return new ymaps.Polygon(coordinates, {}, {
       editorDrawingCursor: 'crosshair',
       // Контекстное меню вершины
       editorMenuManager(editorItems) {

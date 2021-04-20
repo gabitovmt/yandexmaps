@@ -9,8 +9,8 @@ ymaps.modules.require(['geoObject.Arrow'], function (GeoObjectArrow) {
 });
 
 export default class EditableArrow extends EditableGeoObject {
-  constructor(yandexMap, geoObjectOptions) {
-    super(yandexMap, geoObjectOptions);
+  constructor(yandexMap, coordinates, geoObjectOptions) {
+    super(yandexMap, coordinates, geoObjectOptions);
   }
 
   get coordinates() {
@@ -20,7 +20,7 @@ export default class EditableArrow extends EditableGeoObject {
   _newGeoObject() {
     const o = this._geoObjectOptions;
 
-    return new Arrow([], {}, {
+    return new Arrow(this._coordinates, {}, {
       editorDrawingCursor: 'crosshair',
       strokeColor: o.color,
       strokeWidth: 5,

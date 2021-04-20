@@ -13,11 +13,13 @@ class ControlPanelForm {
     this._stopDrawingBtnCallback = this._stopDrawingBtnCallback.bind(this);
     this._clearMapBtnCallback = this._clearMapBtnCallback.bind(this);
     this._saveObjectsBtnCallback = this._saveObjectsBtnCallback.bind(this);
+    this._restoreObjectsBtnCallback = this._restoreObjectsBtnCallback.bind(this);
 
     this._startDrawingBtn.addEventListener('click', this._startDrawingBtnCallback);
     this._stopDrawingBtn.addEventListener('click', this._stopDrawingBtnCallback);
     this._clearMapBtn.addEventListener('click', this._clearMapBtnCallback);
     this._saveObjectsBtn.addEventListener('click', this._saveObjectsBtnCallback);
+    this._restoreObjectsBtn.addEventListener('click', this._restoreObjectsBtnCallback);
   }
 
   get _startDrawingBtn() {
@@ -36,11 +38,16 @@ class ControlPanelForm {
     return this._form.elements['save-objects-btn'];
   }
 
+  get _restoreObjectsBtn() {
+    return this._form.elements['restore-objects-btn'];
+  }
+
   set _isDrawing(value) {
     this._startDrawingBtn.disabled = value;
     this._stopDrawingBtn.disabled = !value;
     this._clearMapBtn.disabled = value;
     this._saveObjectsBtn.disabled = value;
+    this._restoreObjectsBtn.disabled = value;
   }
 
   get _geoObjectOptions() {
@@ -73,7 +80,7 @@ class ControlPanelForm {
     this._isDrawing = true;
 
     const factory = new EditableGeoObjectFactory();
-    this._editableGeoObject = factory.create(this._yandexMap, this._geoObjectOptions);
+    this._editableGeoObject = factory.create(this._yandexMap, [], this._geoObjectOptions);
     this._editableGeoObject.startDrawing();
   }
 
@@ -96,6 +103,16 @@ class ControlPanelForm {
     }));
 
     localStorage.setItem('objects', JSON.stringify(objects));
+  }
+
+  _restoreObjectsBtnCallback() {
+    const rawObjects = localStorage.getItem('objects');
+    const objects = rawObjects == null ? [] : JSON.parse(rawObjects);
+    const factory = new EditableGeoObjectFactory();
+
+    this._clearMapBtnCallback();
+
+    this._objects = objects.map(object => factory.create(this._yandexMap, object.coordinates, object.geoObjectOptions));
   }
 }
 

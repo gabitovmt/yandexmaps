@@ -1,9 +1,10 @@
 import IEditableGeoObject from "./i-editable-geo-object.js";
 
 export default class EditableGeoObject extends IEditableGeoObject {
-  constructor(yandexMap, geoObjectOptions) {
+  constructor(yandexMap, coordinates, geoObjectOptions) {
     super();
     this._yandexMap = yandexMap;
+    this._coordinates = coordinates;
     this._geoObjectOptions = geoObjectOptions;
     this._geoObject = null;
     this._init();

@@ -20,8 +20,8 @@ const starPoints = [
 ];
 
 export default class EditablePoint extends EditableGeoObject {
-  constructor(yandexMap, geoObjectOptions) {
-    super(yandexMap, geoObjectOptions);
+  constructor(yandexMap, coordinates, geoObjectOptions) {
+    super(yandexMap, coordinates, geoObjectOptions);
   }
 
   get coordinates() {
@@ -33,10 +33,13 @@ export default class EditablePoint extends EditableGeoObject {
   _newGeoObject() {
     const o = this._geoObjectOptions;
 
+    const geometry = {
+      type: 'Point'
+    };
+    this._coordinates.length > 0 && (geometry.coordinates = this._coordinates[0]);
+
     return new ymaps.GeoObject({
-      geometry: {
-        type: 'Point'
-      },
+      geometry,
       properties: {}
     }, {
       editorDrawingCursor: 'crosshair',
